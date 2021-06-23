@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h1>Etch-A-Sketch</h1>
+<button id="playSixteen">Play 16</button>
+<div id="container"></div>
+<style>
+    #container {
+        display: grid;
+        
+        width: 960px;
+        height: 960px;
+        margin: 2rem auto;
+        border: 2px solid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        
+    }
+    
+    
+</style>
+<script>
+function createDiv() {
+    let blockDiv = document.createElement("div");
+
+    blockDiv.className = "block-div";
+    blockDiv.style.backgroundColor = "blue";
+    blockDiv.style.border = "1px solid black";
+
+ 
+    return blockDiv;
+}
+
+window.onload = function createBoard(){
+    let board = document.getElementById("container");
+    let divs = [];
+    let numOfDivs = 16;
+
+    for (let i = 0; i < numOfDivs; i++) {
+        divs.push(createDiv());
+        board.appendChild(divs[i]);
+    }
+    return board;
+}
+
+</script>
+</body>
+</html> 
