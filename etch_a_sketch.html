@@ -8,15 +8,18 @@
     #container {
         display: grid;
         
-        width: 960px;
-        height: 960px;
+        width: 30vw;
+        height: 30vw;
         margin: 2rem auto;
         border: 2px solid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
         
     }
     
-    
+    body {
+        text-align: center;
+        
+    }
 </style>
 <script>
     let size = 16;
@@ -37,16 +40,25 @@
        
     }
     let targets = document.getElementsByClassName("block-div");
+    let randomColor = 0;
     window.onload = createBoard(16);
+    window.onload = createRandomColor();
     window.onload = changeColor();
     
+
+    function createRandomColor() {
+       randomColor = Math.floor(Math.random()*16777215).toString(16);
+       
+    }
+
     function changeColor() {
     for (let i = 0; i <targets.length; i++){
         targets[i].addEventListener('mouseover', function changeColor() {
-            targets[i].style.backgroundColor = "green";
+            createRandomColor();
+            targets[i].style.backgroundColor = "#" + randomColor;
         })
     }}
-   
+  
 
     function removeDivs() {
         while (board.hasChildNodes()) {
@@ -55,13 +67,17 @@
 
     
     function createNewBoard() {
-        removeDivs();
         let playerSelection = parseInt(prompt("Please set board size."));
+        if (playerSelection >= 80) {
+            playerSelection = parseInt(prompt("Number is too high. Please set board size."));
+        } 
+        removeDivs();
         createBoard(playerSelection);
         changeColor();
 
     }
-    
+    let nbButton = document.querySelector("#new-board")
+    nbButton.addEventListener("click", createNewBoard);
 
 </script>
 </body>
