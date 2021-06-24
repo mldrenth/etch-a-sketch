@@ -19,28 +19,59 @@
     
 </style>
 <script>
-function createDiv() {
-    let blockDiv = document.createElement("div");
+    let size = 16;
+    let blockDiv = [];
+    function createBoard(size) {
+        const board = document.querySelector("#container");
+        board.style.gridTemplateColumns = (`repeat(${size}, 1fr)`);
+        board.style.gridTemplateRows = (`repeat(${size}, 1fr)`);
+        for (let i= 0; i < size * size ; i++) {
+            blockDiv[i] = document.createElement("div");
+            blockDiv[i].className = "block-div";
+            blockDiv[i].style.backgroundColor = "blue";
+            blockDiv[i].style.border = "1px solid black";
+            blockDiv[i].className = "block-div";
+            board.appendChild(blockDiv[i])
+        }
+       
+    }
+    window.onload = createBoard(16);
+    const target = document.querySelector(".block-div");
 
-    blockDiv.className = "block-div";
-    blockDiv.style.backgroundColor = "blue";
-    blockDiv.style.border = "1px solid black";
+    function changeColor() {
+        blockDiv.forEach(item => {
+            item.addEventListener("mouseover", function (){
+                item.style.backgroundColor ="green";
+            })
+        })
+    }
+
+    target.addEventListener("mouseover", function (){
+        changeColor()
+    });
+
+// function createDiv() {
+//     let blockDiv = document.createElement("div");
+
+//     blockDiv.className = "block-div";
+//     blockDiv.style.backgroundColor = "blue";
+//     blockDiv.style.border = "1px solid black";
 
  
-    return blockDiv;
-}
+//     return blockDiv;
+// }
 
-window.onload = function createBoard(){
-    let board = document.getElementById("container");
-    let divs = [];
-    let numOfDivs = 16;
+// window.onload = function createBoard(){
+//     let board = document.getElementById("container");
+//     let divs = [];
+//     let numOfDivs = 16;
 
-    for (let i = 0; i < numOfDivs; i++) {
-        divs.push(createDiv());
-        board.appendChild(divs[i]);
-    }
-    return board;
-}
+//     for (let i = 0; i < numOfDivs; i++) {
+//         divs.push(createDiv());
+//         board.appendChild(divs[i]);
+//     }
+//     return board;
+// }
 
 </script>
 </body>
