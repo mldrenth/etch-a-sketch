@@ -2,7 +2,7 @@
 <html>
 <body>
 <h1>Etch-A-Sketch</h1>
-<button id="playSixteen">Play 16</button>
+<button id="new-board">New Board</button>
 <div id="container"></div>
 <style>
     #container {
@@ -21,6 +21,7 @@
 <script>
     let size = 16;
     let blockDiv = [];
+    const board = document.querySelector("#container");
     function createBoard(size) {
         const board = document.querySelector("#container");
         board.style.gridTemplateColumns = (`repeat(${size}, 1fr)`);
@@ -35,43 +36,32 @@
         }
        
     }
+    let targets = document.getElementsByClassName("block-div");
     window.onload = createBoard(16);
-    const target = document.querySelector(".block-div");
-
+    window.onload = changeColor();
+    
     function changeColor() {
-        blockDiv.forEach(item => {
-            item.addEventListener("mouseover", function (){
-                item.style.backgroundColor ="green";
-            })
+    for (let i = 0; i <targets.length; i++){
+        targets[i].addEventListener('mouseover', function changeColor() {
+            targets[i].style.backgroundColor = "green";
         })
+    }}
+   
+
+    function removeDivs() {
+        while (board.hasChildNodes()) {
+            board.removeChild(board.firstChild);
+        }}
+
+    
+    function createNewBoard() {
+        removeDivs();
+        let playerSelection = parseInt(prompt("Please set board size."));
+        createBoard(playerSelection);
+        changeColor();
+
     }
-
-    target.addEventListener("mouseover", function (){
-        changeColor()
-    });
-
-// function createDiv() {
-//     let blockDiv = document.createElement("div");
-
-//     blockDiv.className = "block-div";
-//     blockDiv.style.backgroundColor = "blue";
-//     blockDiv.style.border = "1px solid black";
-
- 
-//     return blockDiv;
-// }
-
-// window.onload = function createBoard(){
-//     let board = document.getElementById("container");
-//     let divs = [];
-//     let numOfDivs = 16;
-
-//     for (let i = 0; i < numOfDivs; i++) {
-//         divs.push(createDiv());
-//         board.appendChild(divs[i]);
-//     }
-//     return board;
-// }
+    
 
 </script>
 </body>
